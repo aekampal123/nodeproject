@@ -14,7 +14,7 @@ function handleDisconnect() {
         port: process.env.DB_PORT,
         connectTimeout: 30000,
         ssl: {
-            rejectUnauthorized: true,
+            rejectUnauthorized: false,
             ca: fs.readFileSync("ca.pem"), // Load SSL certificate
         },
     });
