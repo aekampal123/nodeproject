@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -10,10 +11,10 @@ app.use(cors());
 
 // ✅ MySQL Connection
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "flutter_app",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
