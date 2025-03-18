@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+const db = require("./db"); 
 
 require("dotenv").config();
 
@@ -12,24 +13,24 @@ app.use(express.json());
 app.use(cors());
 
 // ✅ MySQL Connection
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.PORT,
-  ssl: {
-    ca: fs.readFileSync("ca.pem"), // Load the certificate
-  },
-});
+// const db = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_DATABASE,
+//   port: process.env.PORT,
+//   ssl: {
+//     ca: fs.readFileSync("ca.pem"), // Load the certificate
+//   },
+// });
 
-db.connect((err) => {
-  if (err) {
-    console.error("❌ MySQL Connection Failed:", err);
-    return;
-  }
-  console.log("✅ Connected to MySQL Database");
-});
+// db.connect((err) => {
+//   if (err) {
+//     console.error("❌ MySQL Connection Failed:", err);
+//     return;
+//   }
+//   console.log("✅ Connected to MySQL Database");
+// });
 
 // ============================================
 // 👤 USERS API
