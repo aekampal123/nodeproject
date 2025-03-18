@@ -2,6 +2,8 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +17,9 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  ssl: {
+    ca: fs.readFileSync("ca.pem"), // Load the certificate
+  },
 });
 
 db.connect((err) => {
