@@ -28,6 +28,17 @@ db.connect((err) => {
 // ============================================
 // 👤 USERS API
 // ============================================
+
+// Endpoint to check DB connection
+app.get("/", (req, res) => {
+  db.ping((err) => {
+    if (err) {
+      return res.status(500).json({ status: "error", message: "Database connection failed", error: err.message });
+    }
+    res.json({ status: "success", message: "Connected to database" });
+  });
+});
+
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -214,7 +225,8 @@ app.put("/inventory/updateStock", (req, res) => {
 
 
 // ============================================
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
